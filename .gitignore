@@ -1,0 +1,65 @@
+# Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.ipr
+*.iml
+
+# STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# VS Code
+.vscode/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Spring local configs
+application-local.properties
+application-local.yml
+application-dev.properties
+application-dev.yml
+
+# Logs
+*.log
+logs/
+
+# SQL dumps
+*.sql
+*.dump
+
+# Upload/storage
+uploads/
+storage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Others
+HELP.md
