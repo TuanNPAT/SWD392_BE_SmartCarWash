@@ -69,9 +69,7 @@ public class SecurityConfig {
                             "/webjars/**",
 
                             "/oauth2/authorization/**",
-                            "/login/oauth2/code/**",
-
-                            "/api/auth/**"
+                            "/login/oauth2/code/**"
                     ).permitAll();
 
                     auth.requestMatchers("/api/**").authenticated();

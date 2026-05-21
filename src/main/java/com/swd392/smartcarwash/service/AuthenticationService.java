@@ -1,13 +1,26 @@
 package com.swd392.smartcarwash.service;
 
-import com.swd392.smartcarwash.dto.request.auth.LoginRequest;
-import com.swd392.smartcarwash.dto.request.auth.RegisterRequest;
+import com.swd392.smartcarwash.dto.request.auth.*;
 import com.swd392.smartcarwash.dto.response.LoginResponse;
+import com.swd392.smartcarwash.dto.response.MessageResponse;
 
 public interface AuthenticationService {
-    LoginResponse register(RegisterRequest request);
+
+    MessageResponse register(RegisterRequest request);
+
+    LoginResponse verifyEmail(VerifyOtpRequest request);
+
+    MessageResponse resendOtp(ResendOtpRequest request);
 
     LoginResponse login(LoginRequest request);
+
+    MessageResponse forgotPassword(ForgotPasswordRequest request);
+
+    LoginResponse resetPassword(ResetPasswordRequest request);
+
+    MessageResponse changePassword(ChangePasswordRequest request);
+
+    MessageResponse logout(String accessToken);
 
     LoginResponse loginWithGoogle(
             String email,
@@ -15,6 +28,4 @@ public interface AuthenticationService {
             String avatarUrl,
             String providerId
     );
-
-    void logout(String accessToken);
 }

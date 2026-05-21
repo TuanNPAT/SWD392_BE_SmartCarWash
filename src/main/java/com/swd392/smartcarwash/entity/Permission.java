@@ -1,45 +1,35 @@
 package com.swd392.smartcarwash.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(onlyExplicitlyIncluded = true)
 @Entity
+@Table(name = "permission")
 public class Permission {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    @ToString.Include
     private Long id;
 
     @Column(unique = true, nullable = false)
+    @ToString.Include
     private String code; // e.g. "USER_VIEW"
 
+    @ToString.Include
     private String name; // e.g. "Xem người dùng"
-    
-    public Permission() {}
-    
+
+    // Backward-compatible custom constructor
     public Permission(String code, String name) {
         this.code = code;
-        this.name = name;
-    }
-    
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public String getCode() {
-        return code;
-    }
-    
-    public void setCode(String code) {
-        this.code = code;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
         this.name = name;
     }
 } 

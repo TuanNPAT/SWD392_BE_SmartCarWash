@@ -2,10 +2,10 @@ package com.swd392.smartcarwash;
 
 import com.swd392.smartcarwash.config.DotenvLoader;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
