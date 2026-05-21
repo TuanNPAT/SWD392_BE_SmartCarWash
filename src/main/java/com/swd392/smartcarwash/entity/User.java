@@ -19,16 +19,21 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    @ToString.Include
     private Long id;
 
     // Local login dùng username, có thể set = email
     @Column(nullable = false, unique = true, length = 100)
+    @ToString.Include
     private String username;
 
     // Google account có thể không có password
@@ -36,12 +41,15 @@ public class User implements UserDetails {
     private String password;
 
     @Column(nullable = false, unique = true, length = 255)
+    @ToString.Include
     private String email;
 
     @Column(name = "full_name", nullable = false, length = 100)
+    @ToString.Include
     private String fullName;
 
     @Column(name = "phone_number", length = 20)
+    @ToString.Include
     private String phoneNumber;
 
     @Column(name = "avatar_url", length = 500)
@@ -53,10 +61,12 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
+    @ToString.Include
     private UserStatus status;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
+    @ToString.Include
     private AuthProvider provider;
 
     // Google subject id
@@ -65,10 +75,12 @@ public class User implements UserDetails {
 
     @Builder.Default
     @Column(name = "is_verify", nullable = false)
+    @ToString.Include
     private boolean verify = false;
 
     @Builder.Default
     @Column(name = "is_locked", nullable = false)
+    @ToString.Include
     private boolean locked = false;
 
     @Builder.Default

@@ -21,46 +21,55 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ResponseObject> handleBadRequest(BadRequestException ex) {
+        log.warn("BadRequestException: {}", ex.getMessage());
         return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ResponseObject> handleUnauthorized(UnauthorizedException ex) {
+        log.warn("UnauthorizedException: {}", ex.getMessage());
         return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage());
     }
 
     @ExceptionHandler(ForbiddenException.class)
     public ResponseEntity<ResponseObject> handleForbidden(ForbiddenException ex) {
+        log.warn("ForbiddenException: {}", ex.getMessage());
         return buildResponse(HttpStatus.FORBIDDEN, ex.getMessage());
     }
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ResponseObject> handleNotFound(NotFoundException ex) {
+        log.warn("NotFoundException: {}", ex.getMessage());
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     @ExceptionHandler(ConflictException.class)
     public ResponseEntity<ResponseObject> handleConflict(ConflictException ex) {
+        log.warn("ConflictException: {}", ex.getMessage());
         return buildResponse(HttpStatus.CONFLICT, ex.getMessage());
     }
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ResponseObject> handleBusiness(BusinessException ex) {
+        log.warn("BusinessException: {}", ex.getMessage(), ex);
         return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<ResponseObject> handleValidation(ValidationException ex) {
+        log.warn("ValidationException: {}", ex.getMessage());
         return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     @ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<ResponseObject> handleInvalidToken(InvalidTokenException ex) {
+        log.warn("InvalidTokenException: {}", ex.getMessage());
         return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage());
     }
 
     @ExceptionHandler(InternalServerErrorException.class)
     public ResponseEntity<ResponseObject> handleInternalServer(InternalServerErrorException ex) {
+        log.error("InternalServerErrorException: {}", ex.getMessage(), ex);
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
@@ -74,6 +83,8 @@ public class GlobalExceptionHandler {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
+
+        log.warn("Validation failed: {}", errors);
 
         ResponseObject response = new ResponseObject(
                 HttpStatus.BAD_REQUEST.value(),
@@ -96,6 +107,8 @@ public class GlobalExceptionHandler {
             );
         }
 
+        log.warn("Constraint violation: {}", errors);
+
         ResponseObject response = new ResponseObject(
                 HttpStatus.BAD_REQUEST.value(),
                 "Validation failed",
@@ -108,7 +121,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResponseObject> handleException(Exception ex) {
 
-        log.error("Unexpected error", ex);
+        log.error("Unexpected error: {} - {}", ex.getClass().getSimpleName(), ex.getMessage(), ex);
 
         return buildResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR,
